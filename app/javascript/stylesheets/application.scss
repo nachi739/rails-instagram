@@ -1,11 +1,17 @@
 @import '~bootstrap/scss/bootstrap';
+//node_modules/bootstrap/scss/bootstrap.scssファイルを読み込むため
 
 @import "layouts/navbar";
+//app/javascript/stylesheets/layouts/navbar.scssファイルを読み込むため
 
 @import "common";
+//app/javascript/stylesheets/common.scssファイルを読み込むため
 
 @import "users/devise";
+//app/javascript/stylesheets/users/devise.scssファイルを読み込むため
 
 @import "users/show";
+//app/javascript/stylesheets/users/show.scssファイルを読み込むため
 
 @import "users/edit";
+//app/javascript/stylesheets/users/edit.scssファイルを読み込むため
