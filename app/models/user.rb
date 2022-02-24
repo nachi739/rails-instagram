@@ -4,6 +4,8 @@ class User < ApplicationRecord
 
   has_many :likes #likesテーブルと1対多の関係(userが１)
 
+  has_many :comments #１対多の関係(1)
+
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,

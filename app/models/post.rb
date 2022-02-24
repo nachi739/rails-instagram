@@ -7,6 +7,9 @@ class Post < ApplicationRecord
 
     has_many :likes, -> { order(created_at: :desc) },dependent: :destroy #likesテーブルと１対多の関係(postが１)
                                                     #投稿削除時に投稿に紐づくいいねも削除
+
+    has_many :comments, dependent: :destroy #１対多の関係(1) 投稿削除時に投稿に紐づくコメントも削除
+
     accepts_nested_attributes_for :photos #Photoモデルの親モデルのため追記
     #accepts_nested_attributes_forは、親子関係のある関連モデル(Postモデル・Photoモデル)でおやから子を作成したり保存するときに使用する
 
