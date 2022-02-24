@@ -20,6 +20,12 @@ class PostsController < ApplicationController
         end
     end
 
+    def index
+        @posts = Post.limit(10).includes(:photos, :user).order('created_at DESC') #limitメソッドは取り出すレコード数の上限指定
+                                #N+1問題のため　関連するテーブルをまとめて取得するincludesメソッドを使い問題を解決している
+                                                        #order('created_at DESC')とすることでcreated_atの降順　投稿された最新の日時順に並び替える
+    end
+
     private #privateメソッドを呼び出すときは、レシーバを指定することは出来ません
             #レシーバとは、あるオブジェクトに対してメソッドを実行しようとした場合、そのメソッドに働きかけるオブジェクトのこと
     def post_params
