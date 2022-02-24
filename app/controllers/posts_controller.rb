@@ -3,6 +3,8 @@ class PostsController < ApplicationController
     before_action :authenticate_user! #サインインしていない状態でnew・createアクションを実行しようとするとサインインページにリダイレクト
     #before_actionはアクションを実行する前にフィルターをかけるメソッド
 
+    before_action :set_post,only:%i(show destroy) #show・destroyアクションが呼ばれる前に@postを読み込むために指定
+
     def new #new インスタンスを作成するメソッド
         @post = Post.new    #@postはビューでフォームを作成する際に使う newメソッドを使ってインスタンスを生成
         @post.photos.build  #build newと同じインスタンスを作成するメソッド buildとnewに違いはない
@@ -27,7 +29,17 @@ class PostsController < ApplicationController
     end
 
     def show
-        @post = Post.find_by(id: params[:id]) #指定のレコード1つを@postに代入
+        #重複コードのためコメントアウト @post = Post.find_by(id: params[:id]) #指定のレコード1つを@postに代入
+    end
+
+    def destroy
+        #重複コードのためコメントアウト @post = Post.find_by(id: params[:id]) #指定のレコード1つを@postに代入
+        if @post.user == current_user #投稿したユーザーと現在サインインしているユーザーが等しいかどうか
+            flash[:notice] = "投稿が削除されました" if @post.destroy #destroyメソッドでデータベースから削除
+        else
+            flash[:alert] = "投稿の削除に失敗しました"
+        end
+        redirect_to root_path
     end
 
     private #privateメソッドを呼び出すときは、レシーバを指定することは出来ません
@@ -38,6 +50,10 @@ class PostsController < ApplicationController
         #requireで受け取る値のキーを設定します
         #permitで変更を加えられるキーを指定します   captionキーとimageキーを指定
         #mergeメソッドは２つのハッシュメソッドを統合するメソッド。  誰が投稿したかという情報が必要なためuser_idの情報を統合
+    end
+
+    def set_post #show・destroyの重複コードをここで定義
+        @post = Post.find_by(id: params[:id])
     end
 
 end
