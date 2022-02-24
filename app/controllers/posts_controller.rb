@@ -26,6 +26,10 @@ class PostsController < ApplicationController
                                                         #order('created_at DESC')とすることでcreated_atの降順　投稿された最新の日時順に並び替える
     end
 
+    def show
+        @post = Post.find_by(id: params[:id]) #指定のレコード1つを@postに代入
+    end
+
     private #privateメソッドを呼び出すときは、レシーバを指定することは出来ません
             #レシーバとは、あるオブジェクトに対してメソッドを実行しようとした場合、そのメソッドに働きかけるオブジェクトのこと
     def post_params
