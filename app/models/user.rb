@@ -2,6 +2,8 @@ class User < ApplicationRecord
 
   has_many :posts, dependent: :destroy #postsテーブルと１対多の関係(userが1)
 
+  has_many :likes #likesテーブルと1対多の関係(userが１)
+
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,

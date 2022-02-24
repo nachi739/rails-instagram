@@ -21,6 +21,10 @@ Rails.application.routes.draw do
   #resourcesメソッドは７つのアクションのルーティングを自動で生成します(index new create show edit update destroy)
   resources :posts,only: %i(index new create show destroy) do #onlyを使うと自動で生成されるアクションを絞り込むことが出来る
     resources :photos, only: %i(create)    #ルーティングをネスト(入れ子)にすることで、親子関係をルーティングで表すことが出来る
-  end                                      #photosはpostsに対して「子」の関係になるので、ネストすることで、どの投稿に紐づくのかを明示出来る
+    resources :likes, only: %i(create destroy)
+  end
+  #photosはpostsに対して「子」の関係になるので、ネストすることで、どの投稿に紐づくのかを明示出来る
+  #likesはpostsに対して「子」の関係になるので、ネストすることで、どの投稿に紐づくのかを明示出来る
+
 
 end
