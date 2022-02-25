@@ -30,6 +30,7 @@ class PostsController < ApplicationController
 
     def show
         #重複コードのためコメントアウト @post = Post.find_by(id: params[:id]) #指定のレコード1つを@postに代入
+
     end
 
     def destroy

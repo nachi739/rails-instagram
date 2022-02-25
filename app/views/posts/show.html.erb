@@ -45,7 +45,8 @@
                         <% if @post.liked_by(current_user).present? %>
                             <%= link_to "いいねを取り消す",post_like_path(@post.id, @post.liked_by(current_user)), method: :DELETE, remote: true, class:"loved hide-text" %>
                         <% else %>
-                            <%= link_to "いいね",post_like_path(@post),method: :POST, remote: true, class:"love hide-text" %>
+                            <% puts @post.id %>
+                            <%= link_to "いいね","/posts/#{@post.id}/likes",method: :POST, remote: true, class:"love hide-text" %>
                         <% end %>
 
                     </div>
